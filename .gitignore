@@ -1,3 +1,5 @@
 node_modules/
-bink/examples/
-bink/docs/
+bink/*
+!bink/src/
+!bink/style/
+

@@ -24,7 +24,12 @@ export default class Home extends Component {
 			location.hash = `edit/${newSketch.data.id}`;
 		});
 
-		new SketchCollection().fetch().then((dataCollection) => {
+		new SketchCollection().fetch().then(async (dataCollection) => {
+			if (dataCollection.length === 0) {
+				for (let i = 0; i < 4; i++) {
+					await dataCollection.create(generateSample());
+				}
+			}
 			dataCollection.sort((a, b) => b.data.createdAt - a.data.createdAt);
 			new components.MediaGridComponent(dataCollection, {
 				itemComponent: SketchTile,

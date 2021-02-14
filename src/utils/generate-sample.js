@@ -13,13 +13,15 @@ export default function generateSample() {
 	const shape = Math.random() > 0.5 ? 'circle' : 'rect';
 	const useCircle = shape === 'circle';
 
-	//-------|---------|---------|---------|---------|---------|---------|---------|
+	const randomFrequency = Math.floor(Math.random() * 8 + 6);
+
+	////-------|---------|---------|---------|---------|---------|---------|---------|
 	const code = `
 		ctx.fillStyle = '${background}';
 		ctx.fillRect(0, 0, width, height);
 
 		ctx.fillStyle = '${foreground}';
-		const size = width / 4 + audioData[6] / 255 * width / 4;
+		const size = width / 4 + audioData[${randomFrequency}] / 255 * width / 4;
 
 		ctx.translate(width / 2, height / 2);
 		ctx.beginPath();

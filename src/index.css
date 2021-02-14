@@ -56,15 +56,23 @@ input:focus {
 }
 
 .main {
-	padding: 2em;
 	display: flex;
 	justify-content: center;
+	padding: 0 2em;
 }
 
 .home {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.home .collection-component {
+	gap: 0;
+}
+
+.about button {
+	margin: 1em 0;
 }
 
 h2 {
@@ -78,15 +86,13 @@ h2 {
 
 .masthead {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
 	align-items: center;
 	justify-items: center;
 	padding: 1em;
-	height: 2em;
+	gap: 15px;
 }
 
 .masthead .brand {
-	justify-self: flex-start;
 	text-decoration: none;
 	color: var(--base-color);
 	font-size: 9pt;
@@ -152,15 +158,10 @@ h2 {
 	display: block;
 }
 
-.about-link {
-	justify-self: flex-end;
-}
-
 .sketch-tile {
 	cursor: pointer;
 	max-width: 230px;
-}
-.sketch-tile .heading-component {
+	margin: 0.2em;
 }
 .sketch-tile:hover {
 	border-color: var(--hover-border-color);
@@ -189,4 +190,22 @@ h2 {
 
 .hidden {
 	display: none;
+}
+
+@media (min-width: 576px) {
+	.masthead {
+		grid-template-columns: 1fr 1fr 1fr;
+		height: 2em;
+		gap: 0;
+	}
+	.masthead .brand {
+		justify-self: flex-start;
+	}
+
+	.about-link {
+		justify-self: flex-end;
+	}
+	.main {
+		padding: 2em;
+	}
 }

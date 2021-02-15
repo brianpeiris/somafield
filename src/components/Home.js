@@ -30,7 +30,9 @@ export default class Home extends Component {
 					await dataCollection.create(generateSample());
 				}
 			}
+
 			dataCollection.sort((a, b) => b.data.createdAt - a.data.createdAt);
+
 			new components.MediaGridComponent(dataCollection, {
 				itemComponent: SketchTile,
 				itemOptions: { audioProvider: options.audioProvider },
@@ -38,6 +40,7 @@ export default class Home extends Component {
 			}).appendTo(this);
 		});
 	}
+
 	_editSketch(sketchModel) {
 		location.hash = `edit/${sketchModel.data.id}`;
 	}

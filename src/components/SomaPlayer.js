@@ -18,6 +18,7 @@ export default class SomaPlayer extends Component {
 
 		this.init();
 	}
+
 	async init() {
 		try {
 			this._channels = (
@@ -60,6 +61,7 @@ export default class SomaPlayer extends Component {
 			.addClass('soma-link')
 			.appendTo(this);
 	}
+
 	_setAudioFromChannelIndex(channelIndex) {
 		const selectedChannel = this._channels[channelIndex];
 		const url = `https://ice4.somafm.com/${selectedChannel.id}-128-mp3`;

@@ -32,8 +32,10 @@ export default class Visualizer extends Component {
 		this._render = this._render.bind(this);
 		requestAnimationFrame(this._render);
 	}
+
 	_render() {
 		this._ctx.resetTransform();
+
 		try {
 			this._currentFunc(
 				this._ctx,
@@ -44,10 +46,13 @@ export default class Visualizer extends Component {
 		} catch (e) {
 			// TODO: display runtime errors
 		}
+
 		requestAnimationFrame(this._render);
 	}
+
 	_handleModelChange() {
 		this._code = this.dataObject.get(this.options.dataField, '');
+
 		try {
 			this._currentFunc = new Function(
 				'ctx',

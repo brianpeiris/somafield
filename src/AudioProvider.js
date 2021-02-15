@@ -20,7 +20,6 @@ export default class AudioProvider {
 	}
 	_updateAudioData() {
 		this._analyser.getByteFrequencyData(this._audioData);
-		this._lastDataUpdate = Date.now();
 		requestAnimationFrame(this._updateAudioData);
 	}
 	get audioData() {

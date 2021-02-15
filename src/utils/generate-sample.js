@@ -6,11 +6,14 @@ function choose(arr) {
 
 export default function generateSample() {
 	const background = choose(colors);
+
 	let foreground;
 	do {
 		foreground = choose(colors);
 	} while (background === foreground);
+
 	const shape = Math.random() > 0.5 ? 'circle' : 'rect';
+
 	const useCircle = shape === 'circle';
 
 	const randomFrequency = Math.floor(Math.random() * 8 + 6);
@@ -41,5 +44,9 @@ export default function generateSample() {
 
 	const title = `${foreground} ${shape}`;
 
-	return { code, title, createdAt: Date.now() };
+	return {
+		code,
+		title,
+		createdAt: Date.now(),
+	};
 }

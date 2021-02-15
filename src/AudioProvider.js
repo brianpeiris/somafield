@@ -1,9 +1,7 @@
 export default class AudioProvider {
-	constructor(src) {
+	constructor() {
 		this._audioEl = document.createElement('audio');
-		this._audioEl.src = src;
 		this._audioEl.crossOrigin = 'anonymous';
-		this._audioEl.volume = 1;
 		document.body.append(this._audioEl);
 
 		const audioCtx = new (window.AudioContext || window.webkitAudioContext)();

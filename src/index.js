@@ -15,7 +15,7 @@ class SomaField extends App {
 
 		new LocalStorageService().attachToDataObject();
 
-		const audioProvider = new AudioProvider('assets/bensound-downtown.mp3');
+		const audioProvider = new AudioProvider();
 
 		this._masthead = new Masthead(undefined, { audioProvider }).appendTo(this);
 		this._main = new Main().appendTo(this);

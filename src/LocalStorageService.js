@@ -1,49 +1,58 @@
 import { DataObject } from '../bink/src/index.js';
 
-export default class LocalStorageService {
-	_responseForData(data) {
-		return new Response(new Blob([data]));
+function responseForData(data) {
+	return new Response(new Blob([data]));
+}
+
+function generateId() {
+	const chars = 'abcdefghjkmnpqrstuvwxyz';
+
+	let id = '';
+	for (let i = 0; i < 6; i++) {
+		id += chars[Math.floor(Math.random() * chars.length)];
 	}
 
+	return id;
+}
+
+export default class LocalStorageService {
 	_get(key) {
 		if (!key.includes('/')) {
+			// We've received a request for all items of a certain key such as "sketches"
 			const prefix = key + '/';
 			const data = [];
 			for (let i = 0; i < localStorage.length; i++) {
 				const storageKey = localStorage.key(i);
-				if (storageKey.startsWith(prefix))
+				if (storageKey.startsWith(prefix)) {
 					data.push(JSON.parse(localStorage.getItem(storageKey)));
+				}
 			}
-			return this._responseForData(JSON.stringify(data));
+
+			return responseForData(JSON.stringify(data));
 		} else {
-			return this._responseForData(localStorage.getItem(key));
+			// We've received a request for a specific item with a key like "sketches/afjsks"
+			return responseForData(localStorage.getItem(key));
 		}
 	}
 
 	_put(key, data) {
 		localStorage.setItem(key, data);
-		return this._responseForData(data);
-	}
-
-	_generateId() {
-		const chars = 'abcdefghjkmnpqrstuvwxyz';
-		let id = '';
-		for (let i = 0; i < 6; i++) {
-			id += chars[Math.floor(Math.random() * chars.length)];
-		}
-		return id;
+		return responseForData(data);
 	}
 
 	_post(key, data) {
-		let id = this._generateId();
+		let id = generateId();
 		while (localStorage.getItem(`${key}/${id}`) !== null) {
-			id = this._generateId();
+			id = generateId();
 		}
+
 		const obj = JSON.parse(data);
 		obj.id = id;
 		data = JSON.stringify(obj);
+
 		localStorage.setItem(`${key}/${id}`, data);
-		return this._responseForData(data);
+
+		return responseForData(data);
 	}
 
 	_delete(key) {
